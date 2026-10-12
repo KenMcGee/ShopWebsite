@@ -17,18 +17,17 @@ class World {
         camera = createCamera();
         scene = createScene();
         renderer = createRenderer();
-        loop = new Loop(camera, scene,renderer);
+        loop = new Loop(camera, scene, renderer);
         container.append(renderer.domElement);
 
         const cube = createCube();
         const light = createLights();
 
+        loop.updatables.push(cube);
+
         scene.add(cube, light);
 
         const resizer = new Resizer(container, camera, renderer);
-        resizer.onResize = () => {
-            this.render();
-        }
     }
     render() {
         renderer.render(scene, camera);
